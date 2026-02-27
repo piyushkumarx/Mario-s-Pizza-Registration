@@ -1,0 +1,154 @@
+.main-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
+.main-header{
+    height: 100px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: "Playwrite NZ Basic", cursive;
+    position: sticky;
+    top: 0;
+    background: white;   
+    z-index: 1000;     
+    border-bottom: 1px solid rgba(0, 0, 0, 0.151);  
+    box-shadow: 0px 1px 30px rgba(0, 0, 0, 0.114);
+}
+
+
+.home-layout{
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+.inner-layout{
+  height: auto;
+  overflow: visible;
+}
+
+.pizza-order-header{
+     /* border: 1px solid black; */
+    height: 100px;
+    
+    display: flex;
+    align-items: center;
+    /* justify-content: flex-start; */
+justify-content: center;
+    gap: 10px;
+    font-family: "Playwrite NZ Basic", cursive;
+    position: sticky;
+    top: 0;
+    background-color: #ffffff ; 
+    
+    z-index: 1000;     
+    border-bottom: 2px solid rgba(245, 244, 244, 0.81);  
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    
+
+}
+
+.back-to-home {
+  position: fixed;
+  top: 110px;
+  left: 25px;
+  z-index: 1000;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgb(255, 255, 255);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  
+}
+
+.back-icon {
+  font-size: 1.2rem;
+}
+
+
+.main-header img{
+    height: 50px;
+    
+}
+
+.main-header span{
+    color: red;
+}
+.content{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.split-container{
+    /* justify-content: center; */
+    /* align-items: center; */
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.pizza-order-heading{
+    color: red;
+}
+
+.registration-form-heading{
+    color:#2867ed;
+}
+
+
+
+
+.split-container{
+    flex: 1;
+    display: flex;
+    overflow: hidden;  
+    
+}
+
+
+@media(max-width:1024px){
+
+    .main-container{
+        height: auto;
+    }
+    .split-container{
+        flex-direction: column;
+        gap: 20px;
+        overflow: unset;
+       
+    }
+
+
+   
+}
+
+
+@media(max-width:550px){
+   .main-header h1{
+    font-size: 1.2rem;
+   }
+
+   .registration-form-heading{
+    font-size: 24px;
+}
+
+.registration-icon{
+font-size: 24px !important;
+}
+}

@@ -1,0 +1,97 @@
+.registration-container{
+    flex: 1;                 
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    background: linear-gradient(135deg, #e9f3ff, #d6e9ff);
+    font-family: "Nunito", sans-serif;
+}
+
+
+
+.registration-box{
+    width: 30rem;
+    padding: 50px;
+    background: white;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);   /
+}
+
+
+.registration-box h1{
+    font-family: "Playwrite NZ Basic" !important;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+
+.registration-box p{
+    text-align: center;
+    color: #555;
+}
+
+
+.icon-box{
+    background: #e3efff;      
+    padding: 22px;
+    border-radius: 20px;
+}
+
+
+
+.icon-user{
+    font-size: 35px;
+    color: #2463eb;
+}
+
+
+.register-btn{
+    font-size: 1.1rem;
+    padding: 12px 30px;
+    border-radius: 30px;
+    border: none;
+    background: #2463eb;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(36,99,235,0.3);  
+    transition: all 0.3s ease;
+}
+.register-btn:hover{
+    transform: translateY(4px);
+}
+
+
+@media(max-width:1024px){
+    .registration-box{
+        margin: 30px 0px;
+    }
+}
+
+@media(max-width:550px){
+  .registration-box{
+        margin: 30px ;
+        padding: 30px 15px ;
+    }
+
+    .registration-box h1{
+        font-size: 25px;
+    }
+
+
+    .icon-box {
+        padding: 18px;
+    }
+
+    .icon-user{
+        font-size: 24px;
+    }
+
+    .registration-box p{
+        font-size: 14px;
+        line-height: 17px;
+    }
+}

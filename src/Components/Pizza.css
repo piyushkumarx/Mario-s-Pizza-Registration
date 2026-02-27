@@ -1,0 +1,103 @@
+.pizza-container-box{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+     align-items: center; 
+    background: linear-gradient(135deg, #f3ebe7, #f5dfd6); 
+     font-family: "Nunito", sans-serif;
+}
+
+
+
+.pizza-box{
+    width: 30rem;
+    padding: 50px;
+    background: white;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.pizza-box h1{
+    font-family: "Playwrite NZ Basic" !important;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.pizza-box p{
+    text-align: center;
+    color: #555;
+}
+
+
+
+.pizza-icon-box{
+    background: #ffe5dc;
+    padding: 22px;
+    border-radius: 20px;
+}
+
+.pizza-icon{
+    font-size: 35px;
+    color: #ff4d1c;
+}
+
+.registration-icon{
+    font-size: 35px;
+    color: #2868ed;
+}
+
+.order-btn{
+    font-size: 1.1rem;
+    padding: 12px 30px;
+    border-radius: 30px;
+    border: none;
+    background: #ff4d1c;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(255,77,28,0.3);
+    transition: all 0.3s ease;
+}
+
+
+.order-btn:hover{
+     transform: translateY(4px);
+}
+
+
+@media(max-width:1024px){
+   .pizza-box{
+
+        margin: 30px 0px;
+    }
+}
+
+
+
+@media(max-width:550px){
+  .pizza-box{
+        margin: 30px ;
+        padding: 30px 15px ;
+    }
+
+    .pizza-box h1{
+        font-size: 25px;
+    }
+
+
+    .pizza-icon-box {
+        padding: 18px;
+    }
+
+    .pizza-icon{
+        font-size: 24px;
+    }
+
+    .pizza-box p{
+        font-size: 14px;
+        line-height: 17px;
+    }
+}
