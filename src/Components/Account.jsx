@@ -1,60 +1,86 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import "./Account.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye ,faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+
 import PizzaContext from "./Context";
 
 export default function Account() {
-  
   const { successfulRegFnc, fullName, setFullName } = useContext(PizzaContext);
 
-  const [touchedName, setTouchedName] = useState(false);
-  const [touchedEmail, setTouchedEmail] = useState(false);
-  const [touchedNumber, setTouchedNumber] = useState(false);
-  const [touchedPass, setTouchedPass] = useState(false);
-  const [touchedGender, setTouchedGender] = useState(false);
-  const [touchedTerms, setTouchedTerms] = useState(false);
+  const [nameTouched, setNameTouched] = useState(false);
+  const [mailTouched, setMailTouched] = useState(false);
+  const [numTouched, setNumTouched] = useState(false);
+  const [passTouched, setPassTouched] = useState(false);
+  const [genTouched, setGenTouched] = useState(false);
+  const [termsTouched, setTermsTouched] = useState(false);
 
-  const [acceptedTerms, setAcceptedTerms] = useState(false);
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [pass, setPass] = useState("");
+  const [userMail, setUserMail] = useState("");
+  const [phoneVal, setPhoneVal] = useState("");
+  const [password, setPassword] = useState("");
+
   const [confirmPass, setConfirmPass] = useState("");
-  const [gender, setGender] = useState("");
+  const [userGender, setUserGender] = useState("");
 
-  const isValidPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/.test(pass);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const isFormValid =
+  const [agree, setAgree] = useState(false);
+
+  const isStrong =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/.test(password);
+
+  const handleSubmit = () => {
+    if (
+      fullName.trim() !== "" &&
+      userMail.includes("@") &&
+      phoneVal.length >= 10 &&
+      isStrong &&
+      password === confirmPass &&
+      userGender !== "" &&
+      agree
+    ) {
+      successfulRegFnc();
+    }
+  };
+
+  const canSubmit =
     fullName.trim() !== "" &&
-    email.trim() !== "" &&
-    phoneNumber.trim() !== "" &&
-    isValidPassword &&
-    pass === confirmPass &&
-    gender !== "" &&
-    acceptedTerms;
-
-  const isDisabledFormBtn = !isFormValid;
-
-  const passwordsMatch = pass.trim() !== "" && confirmPass.trim() !== "" && pass === confirmPass;
+    userMail.includes("@") &&
+    phoneVal.length >= 10 &&
+    isStrong &&
+    password === confirmPass &&
+    userGender !== "" &&
+    agree;
 
   return (
     <div className="create-account-container">
       <div className="account-card">
-        <h2 className="account-title">Create Account</h2>
-        <p className="account-bio">
-          Fill in your details below to get started.
-        </p>
+        <div className="showpass-container">
+          <h2 className="account-title">Create Account</h2>
+          <div>
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="eye-btn"
+            >
+              {showPassword ? <FontAwesomeIcon icon={faEyeSlash}  className="eye-icon"/> : <FontAwesomeIcon icon={faEye} className="eye-icon" />} 
+            </button>
+          </div>
+        </div>
+
+        <p className="account-bio">Enter your details below to get started.</p>
 
         <div className="form-grp">
           <label>Full Name</label>
           <input
             type="text"
-            placeholder="John Doe"
+            placeholder="Jakey Shroff"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
-            onBlur={() => setTouchedName(true)}
+            onBlur={() => setNameTouched(true)}
           />
-
-          {touchedName && fullName.trim() === "" && (
-            <p className="err">Please Enter Full Name</p>
+          {nameTouched && !fullName.trim() && (
+            <p className="err">Name is required</p>
           )}
         </div>
 
@@ -63,13 +89,14 @@ export default function Account() {
             <label>Email Address</label>
             <input
               type="email"
-              placeholder="you@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              onBlur={() => setTouchedEmail(true)}
+              placeholder="example@gmail.com"
+              value={userMail}
+              onChange={(e) => setUserMail(e.target.value)}
+              onBlur={() => setMailTouched(true)}
             />
-            {touchedEmail && (email.trim() === "" || !email.includes("@")) && (
-              <p className="err">Please Enter a valid Email</p>
+
+            {mailTouched && (!userMail.includes("@") || userMail === "") && (
+              <p className="err">Please enter a valid email</p>
             )}
           </div>
 
@@ -77,16 +104,14 @@ export default function Account() {
             <label>Phone Number</label>
             <input
               type="number"
-              placeholder="(555) 000-0000"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              onBlur={() => setTouchedNumber(true)}
+              placeholder="(9625)290480"
+              value={phoneVal}
+              onChange={(e) => setPhoneVal(e.target.value)}
+              onBlur={() => setNumTouched(true)}
             />
-
-            {touchedNumber &&
-              (phoneNumber.trim() === "" || phoneNumber.length < 10) && (
-                <p className="err">Please Enter a valid Phone No</p>
-              )}
+            {numTouched && phoneVal.length < 10 && (
+              <p className="err">Enter a 10-digit number</p>
+            )}
           </div>
         </div>
 
@@ -94,52 +119,52 @@ export default function Account() {
           <div className="pass-first">
             <label>Password</label>
             <input
-              type="password"
-              placeholder="••••••••"
-              value={pass}
-              onChange={(e) => setPass(e.target.value)}
-              onBlur={() => setTouchedPass(true)}
+              type={showPassword ? "text" : "password"}
+              placeholder="********"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onBlur={() => setPassTouched(true)}
             />
           </div>
 
           <div className="pass-sec">
             <label>Confirm Password</label>
             <input
-              type="password"
-              placeholder="••••••••"
+              type={showPassword ? "text" : "password"}
+              placeholder="********"
               value={confirmPass}
               onChange={(e) => setConfirmPass(e.target.value)}
-              onBlur={() => setTouchedPass(true)}
+              onBlur={() => setPassTouched(true)}
             />
           </div>
         </div>
 
-        {touchedPass && pass.length > 0 && !isValidPassword && (
+        {passTouched && password && !isStrong && (
           <p className="err pass-err">
-            Password must be at least 8 characters long and include 1 uppercase
-            letter, 1 lowercase letter, 1 number, and 1 special character.
+            Password must be 8+ characters with uppercase, number, and symbol
           </p>
         )}
 
-        {touchedPass && confirmPass.length > 0 && pass !== confirmPass && (
-          <p className="err pass-err">Passwords do not match.</p>
+        {passTouched && confirmPass && password !== confirmPass && (
+          <p className="err pass-err">Passwords do not match</p>
         )}
 
         <div className="gender-grp">
           <label>Gender</label>
           <select
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
-            onBlur={() => setTouchedGender(true)}
+            value={userGender}
+            onChange={(e) => setUserGender(e.target.value)}
+            onBlur={() => setGenTouched(true)}
           >
-            <option value="">Select your gender</option>
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
-          </select>
+            <option value="">Select...</option>
 
-          {touchedGender && gender === "" && (
-            <p className="err">Please Select Gender</p>
+            <option value="Male">Male</option>
+
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+          {genTouched && !userGender && (
+            <p className="err">Please select your gender</p>
           )}
         </div>
 
@@ -147,24 +172,23 @@ export default function Account() {
           <div className="terms">
             <input
               type="checkbox"
-              checked={acceptedTerms}
-              onChange={(e) => setAcceptedTerms(e.target.checked)}
-              onBlur={() => setTouchedTerms(true)}
+              checked={agree}
+              onChange={(e) => setAgree(e.target.checked)}
+              onBlur={() => setTermsTouched(true)}
             />
-            <span>I accept the Terms of Service and Privacy Policy.</span>
+            <span>I accept the Terms and Privacy Policy.</span>
           </div>
-
-          {touchedTerms && !acceptedTerms && (
-            <p className="err">Please tick the checkbox to continue.</p>
+          {termsTouched && !agree && (
+            <p className="err">You must agree to continue.</p>
           )}
         </div>
 
         <button
           className="submit-btn"
-          disabled={isDisabledFormBtn}
-          onClick={() => successfulRegFnc()}
+          disabled={!canSubmit}
+          onClick={handleSubmit}
         >
-          Create Account
+          Register Now
         </button>
       </div>
     </div>

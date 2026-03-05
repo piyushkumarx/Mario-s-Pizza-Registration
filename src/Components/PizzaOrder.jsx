@@ -229,7 +229,7 @@ export default function PizzaOrder() {
             <h4>{pizzaSize ? `${pizzaSize} Pizza` : null}</h4>
             <p>{crust ? `${crust} Crust` : null}</p>
           </div>
-          <span>$ {PizzaAndCrustPrice}</span>
+          <span>$ {PizzaAndCrustPrice * quantity}</span>
         </div>
         <div>
           <div className="divider"></div>
